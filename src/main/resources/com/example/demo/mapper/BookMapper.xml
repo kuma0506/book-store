@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--  namespace属性：インタフェースの完全修飾クラス名 -->
+<mapper namespace="com.example.demo.repository.BookMapper">
+
+<!--  select属性：SELECT文 -->
+<!--  findById属性：Daoインタフェースの対応するメソッド名 -->
+<!--  resultType属性：検索結果をマッピングするクラス名（今回はBookEntityクラス） -->
+    <select id="findById" resultType="com.example.demo.model.BookEntity">
+        SELECT
+            id,
+            book_name,
+            volume_num,
+            price,
+            author_name,
+            published_date
+         FROM
+            booktable
+         WHERE
+            id = #{id}
+    </select>
+    <select id="findAll" resultType="com.example.demo.model.BookEntity">
+        SELECT
+            id,
+            book_name,
+            volume_num,
+            price,
+            author_name,
+            published_date
+         FROM
+            booktable
+    </select>
+    <select id="countBookEntity" resultType="int">
+        SELECT
+            COUNT(*) count
+         FROM
+            booktable
+    </select>
+    <select id="totalPrice" resultType="int">
+        SELECT
+            SUM(price) totalPlace
+         FROM
+            booktable
+        GROUP BY price
+    </select>   
+</mapper>
